@@ -49,6 +49,7 @@ body {
     #32170E 25%
   );
   user-select: none;
+  touch-action: manipulation
 }
 
 img {
