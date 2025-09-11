@@ -9,12 +9,32 @@ function TapInteraction() {
   const [timeoutId, setTimeoutId] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
   const [isTouching, setIsTouching] = useState(false);
+  const [activePointers, setActivePointers] = useState(new Set());
 
 
   useEffect(() => {
     localStorage.setItem("taps", taps);
   }, [taps]);
 
+  const handlePointerDown = (e) => {
+    setActivePointers((prev) => new Set(prev).add(e.pointerId));
+  };
+
+  const handlePointerUp = (e) => {
+    setActivePointers((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(e.pointerId);
+      return newSet;
+    });
+  };
+
+  const handlePointerCancel = (e) => {
+    setActivePointers((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(e.pointerId);
+      return newSet;
+    });
+  };
 
   const handleTap = () => {
     setTaps((prev) => prev + 1);
@@ -60,7 +80,11 @@ function TapInteraction() {
   };
 
   return (
-    <div onClick={handleContainerClick}>
+    <div onClick={handleContainerClick}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
+      style={{ touchAction: "none" }}>
       <div className="w-full min-w-[300px] px-3 relative z-10">
         <div className="flex justify-between items-center mb-4 pt-2.5 mx-2">
           <div className="text-left flex items-center">
@@ -120,9 +144,9 @@ function TapInteraction() {
             <div
               className="transform will-change-transform transition-transform duration-200 ease-in-out"
               style={{ transform: isTouching ? "scale(0.95)" : "scale(1)" }}
-              onTouchStart={() => setIsTouching(true)}
-              onTouchEnd={() => setIsTouching(false)}
-              onTouchCancel={() => setIsTouching(false)}
+              // onTouchStart={() => setIsTouching(true)}
+              // onTouchEnd={() => setIsTouching(false)}
+              // onTouchCancel={() => setIsTouching(false)}
             >
               <img src="/bronzeStar.webp" className="max-w-[289px] h-auto" />
             </div>
