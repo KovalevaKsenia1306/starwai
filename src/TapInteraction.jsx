@@ -10,11 +10,9 @@ function TapInteraction() {
   const [intervalId, setIntervalId] = useState(null);
   const [isTouching, setIsTouching] = useState(false);
 
-
   useEffect(() => {
     localStorage.setItem("taps", taps);
   }, [taps]);
-
 
   const handleTap = () => {
     setTaps((prev) => prev + 1);
@@ -53,14 +51,19 @@ function TapInteraction() {
   }, [timeoutId, intervalId]);
 
   const handleContainerClick = (e) => {
-    if (e.target.closest('.no-count')) {
+    if (e.target.closest(".no-count")) {
       return;
     }
     handleTap();
   };
 
   return (
-    <div onClick={handleContainerClick}>
+    <div
+      onClick={handleContainerClick}
+      onTouchStart={() => setIsTouching(true)}
+      onTouchEnd={() => setIsTouching(false)}
+      onTouchCancel={() => setIsTouching(false)}
+    >
       <div className="w-full min-w-[300px] px-3 relative z-10">
         <div className="flex justify-between items-center mb-4 pt-2.5 mx-2">
           <div className="text-left flex items-center">
@@ -120,9 +123,6 @@ function TapInteraction() {
             <div
               className="transform will-change-transform transition-transform duration-200 ease-in-out"
               style={{ transform: isTouching ? "scale(0.95)" : "scale(1)" }}
-              onTouchStart={() => setIsTouching(true)}
-              onTouchEnd={() => setIsTouching(false)}
-              onTouchCancel={() => setIsTouching(false)}
             >
               <img src="/bronzeStar.webp" className="max-w-[289px] h-auto" />
             </div>
