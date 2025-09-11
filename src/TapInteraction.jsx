@@ -118,7 +118,7 @@ function TapInteraction() {
 
           <div className="flex justify-center mb-[17px]">
             <div
-              className="transition-transform duration-200"
+              className="transform will-change-transform transition-transform duration-200 ease-in-out"
               style={{ transform: isTouching ? "scale(0.95)" : "scale(1)" }}
               onTouchStart={() => setIsTouching(true)}
               onTouchEnd={() => setIsTouching(false)}
