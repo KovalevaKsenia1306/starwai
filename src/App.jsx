@@ -3,7 +3,7 @@ import TapInteraction from "./TapInteraction";
 function App() {
   return (
     <>
-      <div className="relative min-h-screen overflow-hidden">
+      <div className="relative min-h-screen ">
         <TapInteraction />
         <div className="isolate">
           <div className="absolute w-[75%] h-[33vh] bg-[#F64F14] opacity-70 filter blur-3xl top-0 left-0"></div>

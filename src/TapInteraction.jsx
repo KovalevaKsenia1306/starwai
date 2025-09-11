@@ -163,7 +163,7 @@ function TapInteraction() {
         </div>
       </div>
 
-      <div className="w-full min-w-[300px] fixed bottom-0 z-[999] px-3 font-[Sofia_Sans] text-[10px] no-count">
+      <div className="w-full min-w-[300px]  z-[10] px-3 font-[Sofia_Sans] text-[10px] no-count">
         <div className="grid grid-cols-4">
           <div className="grid grid-rows-2">
             <div className="flex justify-center items-center">
